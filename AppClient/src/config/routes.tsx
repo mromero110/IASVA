@@ -4,5 +4,6 @@ export type Routes = {
     Register: undefined;
     QrReader: undefined;
     PassWord: undefined;
+    Menu: undefined;
     //Feed: { sort: 'latest' | 'top' } | undefined;
 };

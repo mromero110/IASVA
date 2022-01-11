@@ -1,8 +1,8 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { ColorTheme } from "../theme/appTheme";
 
 interface IimageCodeProps {
-    length: number
     step: number
 }
 
@@ -11,32 +11,54 @@ interface ICodeProps {
 }
 
 const ImageCode = (props: IimageCodeProps) => {
-    const { step, length } = props
-    const renderCode = () => {
-        const list = [];
-        for (let index = 0; index < length; index++) {
-            list.push(
-                <Code marked={index >= step} />
-            )
-        }
-        return list;
-    }
-
+    const { step } = props
     return (
-        <View>
-            {renderCode()}
+        <View style={style.inline}>
+            <Code marked={1 <= step} />
+            <Code marked={2 <= step} />
+            <Code marked={3 <= step} />
+            <Code marked={4 <= step} />
         </View>
     );
 }
 
 const Code = (props: ICodeProps) => {
     return (
-        <View>
-            <Text>
-                {props.marked ? "X" : ""}
-            </Text>
+        <View style={style.code_container}>
+            <View style={style.center}>
+                {props.marked && <View style={style.code_circle} />}
+            </View>
+            <View style={style.code_line} />
         </View>
     );
 }
 
 export default ImageCode;
+
+const style = StyleSheet.create({
+    inline: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginHorizontal: 10
+    },
+    center: {
+        alignItems: "center",
+        height: 40,
+    },
+    code_container: {
+        width: 55,
+        margin: 5,
+        paddingTop: 20
+    },
+    code_circle: {
+        backgroundColor: ColorTheme.accent,
+        width: 18,
+        height: 18,
+        borderRadius: 50,
+        marginBottom: 20
+    },
+    code_line: {
+        height: 4,
+        backgroundColor: "gray"
+    }
+});

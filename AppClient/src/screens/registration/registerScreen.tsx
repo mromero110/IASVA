@@ -44,12 +44,8 @@ const RegisterScreen = ({ navigation, route }: Props) => {
     const [checked, setChecked] = useState(true);
     const { register } = InitialConfig;
 
-    useEffect(() => {
-        console.log("render");
-    }, [])
-
     const onNext = () => {
-        navigation.push("QrReader")
+        navigation.push("PassWord")
     }
     const onTouchCamera = () => {
         navigation.push("QrReader")

@@ -8,6 +8,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { AppTheme, ColorTheme } from './src/theme/appTheme';
 import QrReaderScreen from './src/screens/security/qrReaderScreen';
 import PassWordScreen from './src/screens/security/passwordScreen';
+import MenuScreen from './src/screens/menu/menuScreen';
 
 const Stack = createNativeStackNavigator<Routes>();
 const noHeader = { headerShown: false };
@@ -25,7 +26,8 @@ const App = () => {
           <Stack.Screen name={"Login"} component={LoginScreen} options={noHeader} />
           <Stack.Screen name={"Register"} component={RegisterScreen} options={noHeader} />
           <Stack.Screen name={"QrReader"} component={QrReaderScreen} options={{ title: "Lector QR" }} />
-          <Stack.Screen name={"PassWord"} component={PassWordScreen} options={{ title: "Lector QR" }} />
+          <Stack.Screen name={"PassWord"} component={PassWordScreen} options={{ title: "Registrar Contraseña" }} />
+          <Stack.Screen name={"Menu"} component={MenuScreen} options={{ title: "Registrar Contraseña" }} />
         </Stack.Navigator>
       </NavigationContainer >
     </PaperProvider>
