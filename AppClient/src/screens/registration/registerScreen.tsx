@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { FormInput } from "../../componets/formInput";
@@ -8,9 +8,11 @@ import { InitialConfig } from "../../config/initialConfig";
 import { useFormValidator } from "../../hooks/useFormValidator";
 import { ColorTheme, MainTheme } from "../../theme/appTheme";
 import { IFormProp } from "../../models/FormProp";
-import { RoundButtonPrimary } from "../../componets/roundbutton";
+import { RoundButtonPrimary } from "../../componets/roundButton";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Routes } from "../../config/routes";
 
-enum form {
+enum formType {
     SERIAL,
     NOMBRE,
     RECUPERACION
@@ -18,39 +20,55 @@ enum form {
 
 const formConfig = [
     {
-        code: form.SERIAL,
+        code: formType.SERIAL,
         name: InitialConfig.register.lblSerial,
         required: true,
         disabled: true
     }, {
-        code: form.NOMBRE,
+        code: formType.NOMBRE,
         name: InitialConfig.register.lblNombre,
         maxLength: 30,
         required: true,
     }, {
-        code: form.RECUPERACION,
+        code: formType.RECUPERACION,
         name: InitialConfig.register.lblRecuperacion,
         maxLength: 60,
         required: true,
     }
 ] as IFormProp[];
 
-const RegisterScreen = () => {
+type Props = NativeStackScreenProps<Routes, 'Register'>;
+
+const RegisterScreen = ({ navigation, route }: Props) => {
     const { form, actions } = useFormValidator(formConfig);
     const [checked, setChecked] = useState(true);
     const { register } = InitialConfig;
+
+    useEffect(() => {
+        console.log("render");
+    }, [])
+
+    const onNext = () => {
+        navigation.push("QrReader")
+    }
+    const onTouchCamera = () => {
+        navigation.push("QrReader")
+    }
+
     return (
         <SafeAreaView>
             <StatusBar backgroundColor={ColorTheme.primary} barStyle="light-content" />
             <View style={MainTheme.backgroun_white}>
                 <ScrollView>
                     <View style={style.scanner}>
-                        <View style={style.scanner_icon}>
-                            <FontAwesomeIcon
-                                icon={faCamera}
-                                size={80}
-                                color={ColorTheme.white} />
-                        </View>
+                        <TouchableOpacity onPress={onTouchCamera}>
+                            <View style={style.scanner_icon}>
+                                <FontAwesomeIcon
+                                    icon={faCamera}
+                                    size={80}
+                                    color={ColorTheme.white} />
+                            </View>
+                        </TouchableOpacity>
                         <Text style={style.scanner_label}>
                             {register.lblScanner}
                         </Text>
@@ -70,7 +88,7 @@ const RegisterScreen = () => {
                             checked={checked}
                             onValueChange={setChecked} />
                         <View style={style.button}>
-                            <RoundButtonPrimary text={register.btnRegister} />
+                            <RoundButtonPrimary onPress={onNext} text={register.btnRegister} />
                         </View>
                     </View>
                 </ScrollView>
@@ -107,6 +125,7 @@ const style = StyleSheet.create({
         marginBottom: 10
     },
     button: {
-        marginTop: 30
+        paddingHorizontal: 4,
+        marginTop: 60
     }
 });

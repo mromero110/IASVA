@@ -1,6 +1,8 @@
 
 export type Routes = {
     Login: undefined;
-    Register: { userId: string };
+    Register: undefined;
+    QrReader: undefined;
+    PassWord: undefined;
     //Feed: { sort: 'latest' | 'top' } | undefined;
 };

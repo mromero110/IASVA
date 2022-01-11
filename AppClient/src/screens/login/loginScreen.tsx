@@ -1,11 +1,12 @@
 
 import React from "react";
 import { ImageBackground, SafeAreaView, View, StatusBar, Image, StyleSheet } from "react-native";
-import { RoundButtonPrimary, RoundButtonSecondary } from "../../componets/roundbutton";
+import { RoundButtonPrimary, RoundButtonSecondary } from "../../componets/roundButton";
 import { InitialConfig } from "../../config/initialConfig";
 import { ColorTheme, MainTheme } from "../../theme/appTheme";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Routes } from "../../config/routes";
+
 
 type Props = NativeStackScreenProps<Routes, 'Login'>;
 

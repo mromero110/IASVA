@@ -6,6 +6,7 @@ export const ColorTheme = {
     primary: "#448AFF",
     accent: "#448AFF",
     white: "#FFFFFF",
+    black: "black",
     transparent: "transparent"
 }
 
@@ -35,7 +36,7 @@ export const MainTheme = StyleSheet.create({
         borderRadius: 150
     },
     container: {
-        margin: 26,
+        margin: 16,
         flex: 1
     },
     roundButton: {
