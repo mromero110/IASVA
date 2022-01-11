@@ -1,22 +1,45 @@
 import { StyleSheet } from "react-native";
+import { DefaultTheme } from "react-native-paper";
+
 
 export const ColorTheme = {
     primary: "#448AFF",
+    accent: "#448AFF",
     white: "#FFFFFF",
     transparent: "transparent"
 }
 
+export const AppTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: ColorTheme.primary,
+        accent: ColorTheme.accent,
+    },
+};
+
 export const MainTheme = StyleSheet.create({
+    backgroun_white: {
+        width: '100%', height: '100%',
+        backgroundColor: ColorTheme.white
+    },
+    input: {
+        borderBottomWidth: 0.5
+    },
     button: {
         padding: 8,
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: "bold"
     },
     roundImage: {
         borderRadius: 150
     },
+    container: {
+        margin: 26,
+        flex: 1
+    },
     roundButton: {
         borderRadius: 150,
-        backgroundColor: "red",
         paddingHorizontal: 8,
         paddingVertical: 4,
         minWidth: 180,
@@ -26,24 +49,3 @@ export const MainTheme = StyleSheet.create({
     }
 });
 
-export const LoginTheme = StyleSheet.create({
-    background: {
-        width: '100%', height: '100%'
-    },
-    container: {
-        margin: 26,
-        flex: 1,
-    },
-    button_container: {
-        alignItems: "center"
-    },
-    logo_container: {
-        flex: 1,
-        alignSelf: "center",
-        marginTop: 20
-    },
-    logo_image: {
-        width: 240,
-        height: 240
-    }
-});

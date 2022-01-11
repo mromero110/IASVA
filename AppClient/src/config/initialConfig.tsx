@@ -1,14 +1,17 @@
+import { IFormProp } from "../models/FormProp"
 
 export const InitialConfig = {
-    // Lista de prefijos para los icons
-    // lbl = label
-    // ic = icon
-    // btn = button
-    // tx = textbox
-
     // Parametros de la pantalla login
-    loginForm: {
+    login: {
         btnLogin: "Iniciar Sesión",
         btnSetup: "Configuración",
+    },
+    register: {
+        lblScanner: "Pulsar para escanear el código \ndel dispositivo",
+        lblSerial: "Codigo del dispositivo",
+        lblNombre: "Nombre",
+        lblRecuperacion: "Correo de recuperación",
+        chkFaceRecognition: "Habilitar reconocimiento facial",
+        btnRegister: "Continuar"
     }
 }
