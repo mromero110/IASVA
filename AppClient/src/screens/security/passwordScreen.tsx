@@ -2,7 +2,7 @@ import { faLock, faLockOpen, faUserLock } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import ImageCode from "../../componets/imageCode";
 import PassWordKeyBoard from "../../componets/passwordKeyboard";
 import { Routes } from "../../config/routes";
