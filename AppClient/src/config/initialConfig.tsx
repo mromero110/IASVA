@@ -20,5 +20,13 @@ export const InitialConfig = {
         lblSerial: "Serial del dispositivo",
         lblInfo: "Al pulsar continuar se registrará el codigo \nen el dispositivo",
         btnNext: "Guardar"
+    },
+    menu: {
+        lblTitle: "MOTO FUS483 - ESP32",
+        lblComment: "Ten en cuenta que, si el dispositivo no cuenta con señal GSM, debes estar aproximadamente a menos de 20 metros del vehículo para realizar una conexión directa",
+        btnHistory: "Perfiles",
+        btnSwich: "Interruptor",
+        btnGps: "Ubicacion",
+        btnZone: "Zona Segura"
     }
 }

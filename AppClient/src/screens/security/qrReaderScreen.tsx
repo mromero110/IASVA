@@ -1,10 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { RoundButtonPrimary } from "../../componets/roundButton";
+import { RoundButtonPrimary } from "../../componets/roundButtonPrimary";
 import { InitialConfig } from "../../config/initialConfig";
 import { Routes } from "../../config/routes";
-import { ColorTheme, MainTheme } from "../../theme/appTheme";
+import { ColorTheme } from "../../theme/appTheme";
 
 type Props = NativeStackScreenProps<Routes, 'QrReader'>;
 

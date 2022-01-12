@@ -4,6 +4,14 @@ export type Routes = {
     Register: undefined;
     QrReader: undefined;
     PassWord: undefined;
-    Menu: undefined;
+    Main: undefined;
     //Feed: { sort: 'latest' | 'top' } | undefined;
 };
+
+export type RoutesMenu = {
+    Home: undefined;
+    History: undefined;
+    Gps: undefined;
+    Swich: undefined;
+    SecureZone: undefined;
+}

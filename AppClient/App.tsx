@@ -4,14 +4,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import LoginScreen from './src/screens/login/loginScreen';
 import RegisterScreen from './src/screens/registration/registerScreen';
-import { Routes } from './src/config/routes';
+import { Routes, RoutesMenu } from './src/config/routes';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { AppTheme, ColorTheme } from './src/theme/appTheme';
 import QrReaderScreen from './src/screens/security/qrReaderScreen';
 import PassWordScreen from './src/screens/security/passwordScreen';
+import { Screen } from 'react-native-screens';
+import MenuScreen from './src/screens/menu/menuScreen';
 
 const Stack = createNativeStackNavigator<Routes>();
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<RoutesMenu>();
 
 const noHeader = { headerShown: false };
 const options = {
@@ -21,9 +23,13 @@ const options = {
 
 const DrawerMenu = () => {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={LoginScreen} />
-      <Drawer.Screen name="Profile" component={RegisterScreen} />
+    <Drawer.Navigator
+      screenOptions={options}>
+      <Drawer.Screen name="Home" component={MenuScreen} />
+      <Drawer.Screen name="History" component={RegisterScreen} />
+      <Drawer.Screen name="Gps" component={RegisterScreen} />
+      <Drawer.Screen name="Swich" component={RegisterScreen} />
+      <Drawer.Screen name="SecureZone" component={RegisterScreen} />
     </Drawer.Navigator>
   );
 }
@@ -33,13 +39,13 @@ const App = () => {
     <PaperProvider theme={AppTheme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="Main"
           screenOptions={options}>
           <Stack.Screen name={"Login"} component={LoginScreen} options={noHeader} />
           <Stack.Screen name={"Register"} component={RegisterScreen} options={noHeader} />
           <Stack.Screen name={"QrReader"} component={QrReaderScreen} options={{ title: "Lector QR" }} />
           <Stack.Screen name={"PassWord"} component={PassWordScreen} options={{ title: "Registrar Contraseña" }} />
-          <Stack.Screen name={"Menu"} component={DrawerMenu} options={noHeader} /> 
+          <Stack.Screen name={"Main"} component={DrawerMenu} options={noHeader} />
         </Stack.Navigator>
       </NavigationContainer >
     </PaperProvider>

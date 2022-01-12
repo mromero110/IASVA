@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Routes } from "../../config/routes";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -8,9 +9,8 @@ import { InitialConfig } from "../../config/initialConfig";
 import { useFormValidator } from "../../hooks/useFormValidator";
 import { ColorTheme, MainTheme } from "../../theme/appTheme";
 import { IFormProp } from "../../models/FormProp";
-import { RoundButtonPrimary } from "../../componets/roundButton";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Routes } from "../../config/routes";
+import { RoundButtonPrimary } from "../../componets/roundButtonPrimary";
 
 enum formType {
     SERIAL,
