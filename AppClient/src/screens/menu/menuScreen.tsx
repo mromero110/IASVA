@@ -2,16 +2,21 @@ import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { BarStyleSheed } from "../../componets/barStyleSheed";
-import { Routes } from "../../config/routes";
+import { RoutesMenu } from "../../config/routes";
 import { ColorTheme, MainTheme } from "../../theme/appTheme";
 import { FlatButton } from "../../componets/flatButton";
-import { faAtlas, faHistory, faIdCard, faMapMarkedAlt, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faAtlas, faIdCard, faMapMarkedAlt, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { InitialConfig } from "../../config/initialConfig";
 
-type Props = NativeStackScreenProps<Routes, 'Main'>;
+type Props = NativeStackScreenProps<RoutesMenu, 'Home'>;
 
 const MenuScreen = ({ navigation, route }: Props) => {
     const { menu } = InitialConfig;
+
+    const onPress = () => {
+        navigation.navigate("Swich");
+    }
+
     return (
         <SafeAreaView>
             <View style={MainTheme.backgroun_white}>
@@ -23,18 +28,18 @@ const MenuScreen = ({ navigation, route }: Props) => {
                 <View style={style.container}>
                     <View style={style.row}>
                         <View style={style.row}>
-                            <FlatButton text={menu.btnHistory} icon={faIdCard} />
+                            <FlatButton onPress={onPress} text={menu.btnHistory} icon={faIdCard} />
                         </View>
                         <View style={style.row}>
-                            <FlatButton text={menu.btnSwich} icon={faPowerOff} />
+                            <FlatButton onPress={onPress} text={menu.btnSwich} icon={faPowerOff} />
                         </View>
                     </View>
                     <View style={style.row}>
                         <View style={style.row}>
-                            <FlatButton text={menu.btnGps} icon={faMapMarkedAlt} />
+                            <FlatButton onPress={onPress} text={menu.btnGps} icon={faMapMarkedAlt} />
                         </View>
                         <View style={style.row}>
-                            <FlatButton text={menu.btnZone} icon={faAtlas} />
+                            <FlatButton onPress={onPress} text={menu.btnZone} icon={faAtlas} />
                         </View>
                     </View>
                 </View>

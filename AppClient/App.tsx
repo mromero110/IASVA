@@ -9,8 +9,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { AppTheme, ColorTheme } from './src/theme/appTheme';
 import QrReaderScreen from './src/screens/security/qrReaderScreen';
 import PassWordScreen from './src/screens/security/passwordScreen';
-import { Screen } from 'react-native-screens';
 import MenuScreen from './src/screens/menu/menuScreen';
+import SwichScreen from './src/screens/modules/swich/swichScreen';
 
 const Stack = createNativeStackNavigator<Routes>();
 const Drawer = createDrawerNavigator<RoutesMenu>();
@@ -28,7 +28,7 @@ const DrawerMenu = () => {
       <Drawer.Screen name="Home" component={MenuScreen} />
       <Drawer.Screen name="History" component={RegisterScreen} />
       <Drawer.Screen name="Gps" component={RegisterScreen} />
-      <Drawer.Screen name="Swich" component={RegisterScreen} />
+      <Drawer.Screen name="Swich" component={SwichScreen} />
       <Drawer.Screen name="SecureZone" component={RegisterScreen} />
     </Drawer.Navigator>
   );

@@ -3,24 +3,28 @@ import React from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { ColorTheme } from "../theme/appTheme"
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface IFlatButtonProps {
     icon: IconProp,
-    text: string
+    text: string,
+    onPress: () => void;
 }
 
 export const FlatButton = (props: IFlatButtonProps) => {
-    const { icon, text } = props;
+    const { icon, text, onPress } = props;
     return (
-        <View style={style.container}>
-            <FontAwesomeIcon
-                icon={icon}
-                size={70}
-                color={ColorTheme.accent} />
-            <Text style={style.text}>
-                {text}
-            </Text>
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={style.container}>
+                <FontAwesomeIcon
+                    icon={icon}
+                    size={70}
+                    color={ColorTheme.accent} />
+                <Text style={style.text}>
+                    {text}
+                </Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
