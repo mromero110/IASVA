@@ -57,6 +57,9 @@ const SwichScreen = ({ navigation, route }: Props) => {
                 setwsId(data.To);
                 setEstado("Conectado");
                 console.log('Websocket conected.');
+                ws.send("Hola desde App")
+            }else{
+                console.log(data.Data);
             }
         };
 
