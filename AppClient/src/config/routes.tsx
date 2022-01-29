@@ -5,7 +5,6 @@ export type Routes = {
     QrReader: undefined;
     PassWord: undefined;
     Main: undefined;
-    //Feed: { sort: 'latest' | 'top' } | undefined;
 };
 
 export type RoutesMenu = {

@@ -4,12 +4,14 @@ import { DefaultTheme } from "react-native-paper";
 
 export const ColorTheme = {
     primary: "#448AFF",
+    secondary: "#0F1F41",
     accent: "#FF5722",
     white: "#FFFFFF",
     black: "black",
     transparent: "transparent",
     gray: "#919191",
-    backgroud: "#EEEEEE"
+    backgroud: "#EEEEEE",
+    red: "red"
 }
 
 export const AppTheme = {

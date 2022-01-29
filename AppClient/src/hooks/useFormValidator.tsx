@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IFormProp } from "../models/FormProp";
+import { IFormProp } from "../models/data/formProp";
 
 export const useFormValidator = (initialvalue: IFormProp[]) => {
 
@@ -16,8 +16,15 @@ export const useFormValidator = (initialvalue: IFormProp[]) => {
     }
 
     // valida si no hay campos vacios
-    const validateForm = (value: string | undefined) => {
-        return value !== undefined && value.trim().length > 0;
+    const isEmpty = (value: string | undefined) => {
+        return value == undefined || value.trim().length < 1;
+    }
+
+    const getForm = (code: number) => {
+        const index = form.findIndex(m => m.code == code);
+        if (index > -1) {
+            return form[index].value;
+        }
     }
 
     // valida si todos los campos del formulario que tienen
@@ -25,20 +32,29 @@ export const useFormValidator = (initialvalue: IFormProp[]) => {
     const validate = () => {
         let flag = true;
         form.forEach(m => {
-            if (m.required == true && validateForm(m.value) == false) {
-                flag: false;
+            if (m.required == true && isEmpty(m.value)) {
+                flag = false;
             }
         })
         return flag;
     }
 
+    const clear = () => {
+        const list = [...form];
+        const newlist = list.map(m => {
+            m.value = "";
+            return m;
+        });
+        setForm(newlist);
+    }
 
     return {
         form,
         actions: {
-            setForm,
+            getForm,
             onChangeValue,
-            validate
+            validate,
+            clear
         }
     }
 }

@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-import { Routes } from "../../config/routes";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Routes } from "../config/routes";
+import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { FormInput } from "../../componets/formInput";
-import { FormCheckBox } from "../../componets/formCheckbox";
-import { InitialConfig } from "../../config/initialConfig";
-import { useFormValidator } from "../../hooks/useFormValidator";
-import { ColorTheme, MainTheme } from "../../theme/appTheme";
-import { IFormProp } from "../../models/FormProp";
+import { FormInput } from "../componets/formInput";
+import { InitialConfig, WebApiConfig } from "../config/initialConfig";
+import { useFormValidator } from "../hooks/useFormValidator";
+import { ColorTheme, MainTheme } from "../theme/appTheme";
+import { IFormProp } from "../models/data/formProp";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RoundButtonPrimary } from "../../componets/roundButtonPrimary";
+import { RoundButtonPrimary } from "../componets/roundButtonStyle";
+import { useStorage } from "../hooks/useStorage";
+import { useWebApi } from "../hooks/useWebApi";
+import { useIsFocused } from "@react-navigation/native";
 
 enum formType {
     SERIAL,
     NOMBRE,
-    RECUPERACION
+    PLACA,
+    DESCRIPCION
 }
 
 const formConfig = [
@@ -30,9 +33,14 @@ const formConfig = [
         maxLength: 30,
         required: true,
     }, {
-        code: formType.RECUPERACION,
-        name: InitialConfig.register.lblRecuperacion,
-        maxLength: 60,
+        code: formType.PLACA,
+        name: "Placa",
+        maxLength: 10,
+        required: true,
+    }, {
+        code: formType.DESCRIPCION,
+        name: "Descripción del vehiculo",
+        maxLength: 100,
         required: true,
     }
 ] as IFormProp[];
@@ -41,14 +49,52 @@ type Props = NativeStackScreenProps<Routes, 'Register'>;
 
 const RegisterScreen = ({ navigation, route }: Props) => {
     const { form, actions } = useFormValidator(formConfig);
-    const [checked, setChecked] = useState(true);
     const { register } = InitialConfig;
+    const store = useStorage();
+    const webApi = useWebApi(WebApiConfig);
+    const isFocused = useIsFocused();
 
-    const onNext = () => {
-        navigation.push("PassWord")
+    const saveDevice = async () => {
+        return webApi.device.save({
+            Descripcion: actions.getForm(formType.DESCRIPCION) || "",
+            Serial: actions.getForm(formType.SERIAL) || "",
+            Nombre: actions.getForm(formType.NOMBRE) || "",
+            Placa: actions.getForm(formType.PLACA) || "",
+        }).then(response => response);
     }
+
+    const onNext = async () => {
+        if (actions.validate()) {
+            const result = await saveDevice();
+            if (result.Status == false) {
+                Alert.alert("Alerta", "No es posible realizar la asignación, el código no existe ó ya fue asignado");
+            } else {
+                await store.set("serial", {
+                    serial: actions.getForm(formType.SERIAL),
+                    name: actions.getForm(formType.PLACA)
+                });
+                navigation.navigate("PassWord")
+            }
+        } else {
+            Alert.alert("Alerta", "Complete todos los campos antes de continuar")
+        }
+    }
+
+    const setCodeAsyncStorage = async () => {
+        const code = await store.get("code").then(result => result);
+        if (code !== null && code !== undefined) {
+            if (code.data !== code) {
+                actions.onChangeValue(formType.SERIAL, code.data);
+            }
+        }
+    }
+
+    useEffect(() => {
+        setCodeAsyncStorage();
+    }, [isFocused]);
+
     const onTouchCamera = () => {
-        navigation.push("QrReader")
+        navigation.push("QrReader");
     }
 
     return (
@@ -79,10 +125,6 @@ const RegisterScreen = ({ navigation, route }: Props) => {
                                 </View>
                             )}
                         </View>
-                        <FormCheckBox
-                            text={register.chkFaceRecognition}
-                            checked={checked}
-                            onValueChange={setChecked} />
                         <View style={style.button}>
                             <RoundButtonPrimary onPress={onNext} text={register.btnRegister} />
                         </View>
@@ -122,6 +164,6 @@ const style = StyleSheet.create({
     },
     button: {
         paddingHorizontal: 4,
-        marginTop: 60
+        marginTop: 10
     }
 });

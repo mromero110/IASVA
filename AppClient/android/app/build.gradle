@@ -152,6 +152,13 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+
+        release {
+            storeFile file('clave.keystore')
+            storePassword 'Roszone1235'
+            keyAlias 'clave'
+            keyPassword 'Roszone1235'
+        }
     }
     buildTypes {
         debug {
@@ -192,7 +199,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

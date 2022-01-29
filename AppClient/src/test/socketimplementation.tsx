@@ -2,9 +2,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { RoundButton } from "../../../componets/roundButton";
-import { RoutesMenu } from "../../../config/routes";
-import { ColorTheme } from "../../../theme/appTheme";
+import { RoundButton } from "../componets/roundButton";
+import { RoutesMenu } from "../config/routes";
+import { ColorTheme } from "../theme/appTheme";
 
 
 type Props = NativeStackScreenProps<RoutesMenu, 'Swich'>;
@@ -24,7 +24,7 @@ const newboton = (nombre: string, color: string): IButtonColor => {
 }
 
 
-const SwichScreen = ({ navigation, route }: Props) => {
+const SocketScreen = ({ navigation, route }: Props) => {
 
     const [estado, setEstado] = useState("");
     const [botones, setBotones] = useState<IButtonColor[]>([])
@@ -143,7 +143,7 @@ const SwichScreen = ({ navigation, route }: Props) => {
 }
 
 
-export default SwichScreen;
+export default SocketScreen;
 
 const style = StyleSheet.create({
     container: {

@@ -3,7 +3,7 @@ import React from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { ColorTheme } from "../theme/appTheme"
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 interface IFlatButtonProps {
     icon: IconProp,
@@ -14,28 +14,28 @@ interface IFlatButtonProps {
 export const FlatButton = (props: IFlatButtonProps) => {
     const { icon, text, onPress } = props;
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableWithoutFeedback onPress={onPress}>
             <View style={style.container}>
-                <FontAwesomeIcon
-                    icon={icon}
-                    size={70}
-                    color={ColorTheme.accent} />
-                <Text style={style.text}>
-                    {text}
-                </Text>
+                <View style={style.cell}>
+                    <FontAwesomeIcon
+                        icon={icon}
+                        size={70}
+                        color={ColorTheme.primary} />
+                    <Text style={style.text}>
+                        {text}
+                    </Text>
+                </View>
             </View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
     )
 }
 
 const style = StyleSheet.create({
     container: {
-        minWidth: 160,
         backgroundColor: ColorTheme.white,
         paddingVertical: 40,
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         borderRadius: 10,
-        alignItems: "center",
         margin: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -44,12 +44,17 @@ const style = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
+    },
+    cell: {
+        width: 120,
+        alignItems: "center",
     },
     text: {
         marginTop: 10,
-        fontSize: 18,
-        fontWeight: "bold"
+        fontSize: 16,
+        fontWeight: "bold",
+        textAlign: "center",
+        flexWrap: "nowrap"
     }
 });

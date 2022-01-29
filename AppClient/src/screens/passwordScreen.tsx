@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import ImageCode from "../../componets/imageCode";
-import PassWordKeyBoard from "../../componets/passwordKeyboard";
-import { Routes } from "../../config/routes";
-import { ColorTheme } from "../../theme/appTheme";
+import ImageCode from "../componets/imageCode";
+import PassWordKeyBoard from "../componets/passwordKeyboard";
+import { Routes } from "../config/routes";
+import { ColorTheme } from "../theme/appTheme";
 
 type Props = NativeStackScreenProps<Routes, 'QrReader'>;
 
@@ -25,7 +25,7 @@ const PassWordScreen = ({ navigation, route }: Props) => {
         } else {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'Menu' }]
+                routes: [{ name: 'Main' }]
             });
         }
     }

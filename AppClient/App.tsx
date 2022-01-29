@@ -2,15 +2,18 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import LoginScreen from './src/screens/login/loginScreen';
-import RegisterScreen from './src/screens/registration/registerScreen';
 import { Routes, RoutesMenu } from './src/config/routes';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { AppTheme, ColorTheme } from './src/theme/appTheme';
-import QrReaderScreen from './src/screens/security/qrReaderScreen';
-import PassWordScreen from './src/screens/security/passwordScreen';
-import MenuScreen from './src/screens/menu/menuScreen';
-import SwichScreen from './src/screens/modules/swich/swichScreen';
+import PassWordScreen from './src/screens/passwordScreen';
+import MenuScreen from './src/screens/menuScreen';
+import SwichScreen from './src/screens/swichScreen';
+import HistoryScreen from './src/screens/historicalScreen';
+import DeviceScreen from './src/screens/deviceScreen';
+import LoginScreen from './src/screens/loginScreen';
+import RegisterScreen from './src/screens/registerScreen';
+import GpsScreen from './src/screens/gpsScreen';
+import SecureZoneScreen from './src/screens/secureZoneScreen';
 
 const Stack = createNativeStackNavigator<Routes>();
 const Drawer = createDrawerNavigator<RoutesMenu>();
@@ -25,11 +28,11 @@ const DrawerMenu = () => {
   return (
     <Drawer.Navigator
       screenOptions={options}>
-      <Drawer.Screen name="Home" component={MenuScreen} />
-      <Drawer.Screen name="History" component={RegisterScreen} />
-      <Drawer.Screen name="Gps" component={RegisterScreen} />
-      <Drawer.Screen name="Swich" component={SwichScreen} />
-      <Drawer.Screen name="SecureZone" component={RegisterScreen} />
+      <Drawer.Screen name="Home" component={MenuScreen} options={{ title: "Menu Principal" }} />
+      <Drawer.Screen name="History" component={HistoryScreen} options={{ title: "Historial" }} />
+      <Drawer.Screen name="Gps" component={GpsScreen} options={{ title: "Ubicación" }} />
+      <Drawer.Screen name="Swich" component={SwichScreen} options={{ title: "Protección" }} />
+      <Drawer.Screen name="SecureZone" component={SecureZoneScreen} options={{ title: "Zonas Seguras" }} />
     </Drawer.Navigator>
   );
 }
@@ -39,12 +42,12 @@ const App = () => {
     <PaperProvider theme={AppTheme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Main"
+          initialRouteName="Login"
           screenOptions={options}>
           <Stack.Screen name={"Login"} component={LoginScreen} options={noHeader} />
           <Stack.Screen name={"Register"} component={RegisterScreen} options={noHeader} />
-          <Stack.Screen name={"QrReader"} component={QrReaderScreen} options={{ title: "Lector QR" }} />
-          <Stack.Screen name={"PassWord"} component={PassWordScreen} options={{ title: "Registrar Contraseña" }} />
+          <Stack.Screen name={"QrReader"} component={DeviceScreen} options={{ title: "Codigo del dispositivo" }} />
+          <Stack.Screen name={"PassWord"} component={PassWordScreen} options={{ title: "Registre una contraseña" }} />
           <Stack.Screen name={"Main"} component={DrawerMenu} options={noHeader} />
         </Stack.Navigator>
       </NavigationContainer >
